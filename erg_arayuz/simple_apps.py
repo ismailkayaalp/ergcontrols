@@ -5,9 +5,26 @@ from utils import get_ip_address, draw_circle, load_data_from_json
 import subprocess
 import platform  # İşletim sistemini tespit etmek için
 
+import sqlite3  # SQLite modülü
+
 class SimpleApp(QWidget):
     def __init__(self):
         super().__init__()
+
+        # SQLite veritabanına bağlantı
+        self.conn = sqlite3.connect('application_logs.db')
+        self.cursor = self.conn.cursor()
+
+        # Log tablosunu oluştur (eğer yoksa)
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT,
+                ip_address TEXT,
+                wifi_signal_strength TEXT
+            )
+        ''')
+        self.conn.commit()
 
         # Ana etiket (Başlık)
         self.title_label = QLabel('ERG CONTROLS', self)
@@ -16,12 +33,12 @@ class SimpleApp(QWidget):
 
         # Personel raporu ve saat etiketleri için yatay layout
         header_layout = QHBoxLayout()
-        
+
         # Personel raporu etiketi
         self.personel_label = QLabel("Personel Raporu", self)
         self.personel_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #2B3A67;")  
         header_layout.addWidget(self.personel_label)
-        
+
         # Saat etiketi
         self.time_label = QLabel()
         self.time_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #2B3A67;")
@@ -148,6 +165,9 @@ class SimpleApp(QWidget):
         self.current_page = 0
         load_data_from_json(self.table)
 
+        # Uygulama açıldığında log kaydet
+        self.log_application_start()
+
     def update_info(self):
         current_time = QDateTime.currentDateTime().toString('hh:mm:ss')
         self.time_label.setText(f"Saat: {current_time}")
@@ -183,30 +203,45 @@ class SimpleApp(QWidget):
         for row in range(total_rows):
             self.table.setRowHidden(row, not (start_row <= row < end_row))
 
+    def log_application_start(self):
+        # Zaman damgası, IP adresi ve Wi-Fi sinyal gücü ile veritabanına log kaydet
+        timestamp = QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')
+        ip_address = get_ip_address()
+        sinyal_gucu = wifi_sinyal_gucu_al()
+
+        self.cursor.execute('''
+            INSERT INTO logs (timestamp, ip_address, wifi_signal_strength)
+            VALUES (?, ?, ?)
+        ''', (timestamp, ip_address, sinyal_gucu))
+        self.conn.commit()
+
 # İşletim sistemi kontrolü yapılarak sinyal gücü alınır
 def wifi_sinyal_gucu_al():
     try:
         os_name = platform.system()
-        
-        if os_name == "Linux":
-            # Linux için nmcli komutunu kullan
-            sonuc = subprocess.run(['nmcli', '-f', 'IN-USE,SIGNAL', 'device', 'wifi'], stdout=subprocess.PIPE)
-            wifi_bilgisi = sonuc.stdout.decode('utf-8').strip().split('\n')
 
-            for satir in wifi_bilgisi:
-                if '*' in satir:  # * aktif bağlantıyı gösterir
-                    sinyal_gucu = satir.split()[1]  # İkinci değer sinyal gücüdür
-                    return int(sinyal_gucu)
+        if os_name == "Linux":
+            # Raspberry Pi üzerinde iwconfig komutunu kullanarak Wi-Fi sinyal gücünü al
+            sonuc = subprocess.check_output(["iwconfig"], universal_newlines=True)
+            sinyal_gucu = None
+            for satir in sonuc.split("\n"):
+                if "Link Quality" in satir:
+                    # Wi-Fi sinyal gücünü çıkar
+                    sinyal_gucu = int(satir.split("=")[1].split("/")[0])
+                    break
+            return sinyal_gucu
 
         elif os_name == "Windows":
-            # Windows için netsh komutunu kullan
-            sonuc = subprocess.run(['netsh', 'wlan', 'show', 'interfaces'], stdout=subprocess.PIPE)
-            wifi_bilgisi = sonuc.stdout.decode('utf-8')
-            sinyal_satiri = [satir for satir in wifi_bilgisi.split('\n') if 'Signal' in satir]
-            if sinyal_satiri:
-                sinyal_gucu = int(sinyal_satiri[0].split(':')[1].strip().replace('%', ''))
-                return sinyal_gucu
+            # Windows üzerinde netsh komutunu kullanarak Wi-Fi sinyal gücünü al
+            sonuc = subprocess.check_output(["netsh", "wlan", "show", "interfaces"], universal_newlines=True)
+            for satir in sonuc.split("\n"):
+                if "Signal" in satir:
+                    # Wi-Fi sinyal gücünü çıkar
+                    sinyal_gucu = int(satir.split(":")[1].strip().replace("%", ""))
+                    return sinyal_gucu
+        else:
+            return None
 
     except Exception as e:
-        print(f"Hata: {e}")
-    return None
+        print(f"Wi-Fi sinyal gücü alınırken hata: {e}")
+        return None
