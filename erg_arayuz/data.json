@@ -1,0 +1,164 @@
+{
+    "personel": [
+        {
+            "isim": "Orhan",
+            "meslek": "Doktor",
+            "hasta_alinma": "%23 (23/20)",
+            "hasta_cikma": "%28 (28/20)",
+            "toplam": "%51 (51/40)",
+            "dezenfektan": "10"
+        },
+        {
+            "isim": "Murat",
+            "meslek": "Sağlık Teknikeri",
+            "hasta_alinma": "%17 (17/20)",
+            "hasta_cikma": "%50 (50/20)",
+            "toplam": "%67 (67/40)",
+            "dezenfektan": "2"
+        },
+        {
+            "isim": "Burak",
+            "meslek": "Hemşire",
+            "hasta_alinma": "%14 (14/20)",
+            "hasta_cikma": "%47 (47/20)",
+            "toplam": "%61 (61/40)",
+            "dezenfektan": "11"
+        },
+        {
+            "isim": "Ali",
+            "meslek": "Doktor",
+            "hasta_alinma": "%10 (10/20)",
+            "hasta_cikma": "%43 (43/20)",
+            "toplam": "%53 (53/40)",
+            "dezenfektan": "3"
+        },
+        {
+            "isim": "Aslı",
+            "meslek": "Doktor",
+            "hasta_alinma": "%28 (28/20)",
+            "hasta_cikma": "%12 (12/20)",
+            "toplam": "%40 (40/40)",
+            "dezenfektan": "1"
+        },
+        {
+            "isim": "Ahmet",
+            "meslek": "Doktor",
+            "hasta_alinma": "%23 (23/20)",
+            "hasta_cikma": "%20 (20/20)",
+            "toplam": "%43 (43/40)",
+            "dezenfektan": "16"
+        },
+        {
+            "isim": "Gül",
+            "meslek": "Doktor",
+            "hasta_alinma": "%28 (28/20)",
+            "hasta_cikma": "%27 (27/20)",
+            "toplam": "%55 (55/40)",
+            "dezenfektan": "2"
+        },
+        {
+            "isim": "Elif",
+            "meslek": "Sağlık Teknikeri",
+            "hasta_alinma": "%23 (23/20)",
+            "hasta_cikma": "%24 (24/20)",
+            "toplam": "%47 (47/40)",
+            "dezenfektan": "13"
+        },
+        {
+            "isim": "Kaan",
+            "meslek": "Doktor",
+            "hasta_alinma": "%32 (32/20)",
+            "hasta_cikma": "%14 (14/20)",
+            "toplam": "%46 (46/40)",
+            "dezenfektan": "6"
+        },
+        {
+            "isim": "Ozan",
+            "meslek": "Hemşire",
+            "hasta_alinma": "%39 (39/20)",
+            "hasta_cikma": "%39 (39/20)",
+            "toplam": "%78 (78/40)",
+            "dezenfektan": "5"
+        },
+        {
+            "isim": "Emre",
+            "meslek": "Doktor",
+            "hasta_alinma": "%38 (38/20)",
+            "hasta_cikma": "%50 (50/20)",
+            "toplam": "%88 (88/40)",
+            "dezenfektan": "4"
+        },
+        {
+            "isim": "Selin",
+            "meslek": "Doktor",
+            "hasta_alinma": "%37 (37/20)",
+            "hasta_cikma": "%23 (23/20)",
+            "toplam": "%60 (60/40)",
+            "dezenfektan": "11"
+        },
+        {
+            "isim": "Zeynep",
+            "meslek": "Doktor",
+            "hasta_alinma": "%29 (29/20)",
+            "hasta_cikma": "%48 (48/20)",
+            "toplam": "%77 (77/40)",
+            "dezenfektan": "19"
+        },
+        {
+            "isim": "Ayşe",
+            "meslek": "Hemşire",
+            "hasta_alinma": "%22 (22/20)",
+            "hasta_cikma": "%44 (44/20)",
+            "toplam": "%66 (66/40)",
+            "dezenfektan": "3"
+        },
+        {
+            "isim": "Serkan",
+            "meslek": "Doktor",
+            "hasta_alinma": "%21 (21/20)",
+            "hasta_cikma": "%18 (18/20)",
+            "toplam": "%39 (39/40)",
+            "dezenfektan": "17"
+        },
+        {
+            "isim": "Seda",
+            "meslek": "Hemşire",
+            "hasta_alinma": "%35 (35/20)",
+            "hasta_cikma": "%47 (47/20)",
+            "toplam": "%82 (82/40)",
+            "dezenfektan": "5"
+        },
+        {
+            "isim": "Merve",
+            "meslek": "Doktor",
+            "hasta_alinma": "%39 (39/20)",
+            "hasta_cikma": "%37 (37/20)",
+            "toplam": "%76 (76/40)",
+            "dezenfektan": "2"
+        },
+        {
+            "isim": "Fatma",
+            "meslek": "Hemşire",
+            "hasta_alinma": "%33 (33/20)",
+            "hasta_cikma": "%36 (36/20)",
+            "toplam": "%69 (69/40)",
+            "dezenfektan": "13"
+        },
+        {
+            "isim": "Yusuf",
+            "meslek": "Hemşire",
+            "hasta_alinma": "%12 (12/20)",
+            "hasta_cikma": "%14 (14/20)",
+            "toplam": "%26 (26/40)",
+            "dezenfektan": "10"
+        },
+        {
+            "isim": "Leyla",
+            "meslek": "Doktor",
+            "hasta_alinma": "%32 (32/20)",
+            "hasta_cikma": "%32 (32/20)",
+            "toplam": "%64 (64/40)",
+            "dezenfektan": "4"
+        }
+    ]
+}
